@@ -1,0 +1,390 @@
+ JAVA
+ 
+ Source file - plain text .java extention, compiled to .class file by javac
+ comments
+	/* TEXT */ - code comments  - ignored by compiler
+	/** DOCUMENTATION */ -  Documentation comments - used by javadoc tool to generate documentations
+	//TEXT - single line comment
+	
+
+ Object - State + behaviour
+	- a object stores state in fields & exposes behaviour through methods
+	- methods operates on an object's internal state and servers as the primary mechanism for object-to-object communication
+	
+	- Hiding internal state and requiring all interaction to be performed through an object's methods is known as Data Encapsulation
+
+ Inheritance
+	- allowing classes to INHERIT commonly used state & behaviour from other classes
+
+ Interface
+	 - Methods form the object's "interface" with outside world
+	 - Implementating an interface allows a class to become more formal about the behaviour it promises to provice. Interfaces form a contract between the class and the outside world, and this contract is enforced at build time by the compiler
+
+ Package - a namespace to organise a set of related classes & interfaces
+ 
+ Instance Variables (NON-Static Fields)
+	- object store their individual states in "non-static fields" i.e. fields declared without STATIC keyword. Thier values are unique to each instance of a class
+	
+ Class Variables (static fields)
+	- declared with STATIC modifiers, this tells compiler that there is exactly one copy of this variable in existance, regardless to how many times a class hgas been instantiated
+	
+ Local Variables - Method level variable
+ 
+ Parameters - They are always classified as "variables" not fields - passed into a method
+ 
+ 
+ Naming
+	- Case sensitive
+	- Unlimited length sequence of Uni-Code letters & digits, begining with a letter, the dollar($) sign or underscore( _ )
+	- white space is not permitted
+	
+ Primitive Data Type
+	- Statically types - Variables must first be decalred before they can be used. This involves stating variable's type and namespace
+	- Primitive values do not share state with other primitive values
+	- Byte 
+		- 8-bit signed 2's complement integer
+		-  -128 to 127 (inclusive)
+		- default - 0 (ZERO)
+	- short 
+		- 16 bit signed 2's complement integer
+		- -32768 to 32767 (inclusive)
+		- default - 0 (ZERO)
+	- int
+		- 32 bit
+		- -2^31 to 2^31-1
+		- to use unsigned(i.e 0->N, positive numbers) use Integer class - 0 to 2^32-1
+		- default 0
+	long
+		- 64 bit
+		- -2^63 tp 2^62-1
+		- unsigned 0-2^64-1
+		- default 1l
+	float
+		- Single precision 32 bit IEEE 754 floating point
+		- never to be used for precise values like currency
+		- default 0.0f
+	double
+		- double precision 64 bit
+		- should not be used for precise values like currency
+		- default 0.0d
+	boolean
+		- only true of false
+		- 1 bit of information but size is not that precisely defined
+		- default false
+	char
+		- single 16 bit unicode charater
+		- 0 to 65535
+		- default - '\U0000'
+	
+ Default Values
+	- class Variables - set by the compiler
+	- local variables - not set, assign a value before user or will give compile time error
+	
+	- A literal is a source code representation of a fixed value
+	 
+		 Decimal - 0-9 Base 10
+		 HexaDecimal 0-9, A-F, Base 16
+		 Binary - 0-1, Base 2
+		 Prefix
+			- Ox - hexadecimal
+			-ob - binary
+		 Example
+			- 26 - > decimal
+			- Ox1A -> HexaDecimal
+			- Ob11010 -> Binary
+			
+		double 
+			- 123.4=1.234e2 (multiply/divide by 100) = 123.4f(float)
+		' - single quote- char
+		" - double quotes - string
+ - Escape sequence for char & String
+	- \b - backspace
+	- \n - line feed
+	- \r - carrige return
+	- \' - single quotes
+	- \t - tab
+	- \f - form feed
+	- \" - double quotes
+	- \\ - backslash
+	
+ - underscore can be used in numeric literals like we use , in numbers
+	- 123456 = 123_456
+	- only between digits, not at staring or end
+ - Array
+	- fixed number of values of a single type
+	- type[] name = TypeName
+	- array.length
+	- multidimension array can have different length arrays
+	- Copy Array
+		- System.arrayCopy()
+		- Java.util.Arrays.copyOfRange()
+		- staring index in inclusive, end is not
+
+ - Control Flow
+	- if else
+	- Switch
+		- byte, short, char,int, enum, string
+		- can have multiple case statements
+			- case1 : case 2: case3:
+				winter
+		- throws null pointer
+	- for - all inner statements are optional
+		- for(;;) - infinite loop
+	- Break
+		- labelled & unlabelled
+		- unlabelled 
+			- breaks the block in which it is written
+		- labelled
+			- breaks the label
+			- Example
+				search:
+					for(){
+						for(){
+							break search; //-this break will exit all inner blocks i.e both for loops and will end the search block
+						}
+					}
+		- continue
+			- skips the current iteration
+			- labelled & unlabelled (same as break)
+############################################################################################################################################
+ - CLASSES AND OBJECTS
+	- syntax
+		calss className{
+			fields
+			constructors
+			declarations
+			methods
+		}
+	- private modifier can only be applied to Nested Classes
+	- This first letter of a class name should be CAPITAL
+	- the first (or only) word in a method name should be a verb
+	- Overloading methods
+		- same name , different Parameters
+	- Arbitrary number of Arguments - called varargs (...)
+		- To use varargs, you follow the type of the last parameter by ellipsis (... i.e three dots), then a space and them paramter name
+		- example
+			public Polygon polygonFrom(Point... corners);
+			- polygonFrom can be callede using an array of Points type or sequence of arguments of type Point
+	- if method param name = class field name - this is called Shadowing - only used in setters and getters & constructors
+	- Passing Primitive data type Arguments
+		- primitive data types are passed by "VALUE" in methods
+		- any change to primitive data type arguments in methods will be lost when method returns/finish execution
+		- using wrapper classes does not work as well
+	- Passing reference data types arguments
+		- Reference data types paramters, such as objects, are also passed into methods by value
+		- this means that when method returns, the passed in reference still refers to the same object as before, However, the values of object's field can be changed in the method if they have proper modifier
+		-Example
+			public vloid moveCircle(Cirlce cirlce, int x, int y){
+				cirlce.setX(x);
+				cirlce.setY(y);
+				cirlce = nwe Cirlce(0,0); - this has no permanence, this new circle reference will be change only in the method, after it returns, the reference will be back to the original circle
+			}
+ - OBJECTS
+	- Point origin = new Point(0,0);
+	- Declaration
+		- Point origin - an object is declared of type Point with name origin
+	- Instantiation
+		- new - an object is created(an instance is created) using new keyword
+	- Initialization - new Point(0,0);
+		- new followed by constructor, which initaized the new object
+	- Instantiating a class
+		- The "new" operator instantiates a coass by allocating memory for new objects and returning a refence to that memory
+		- new keyword systax - new constructor
+		- new operator requires a single Post fix argument i.e a call to a constructor
+	- you can use return; statement in a void method to return, but cannot return value from void method
+
+ - RETURNING A CLASS OR ITERFACE
+	- when a method uses a class name as its return type, the class if type of the returned object must be either a subclass of, or the exact class of the return type
+	- Example 1
+		- Object -> Number -> ImagineryNumbner
+			Public Number returnNumber(); - this can return Number and ImagineryNumbner but not Object
+	- Example 2
+		- Shape -> FourSidedShape ->Rectangle
+							      ->Square
+		public FourSidedShape returnShape(); - this can return FourSidedShape, Rectangle & Square but not Shape
+	- you can also use interface names as return types, the returned object must implement the interface
+	
+ - EXPLICIT CONSTRUCTOR INVOCATION
+	- when one constructor invoked another constructor using "this" keyword
+	- if present the invocation of another constructor must be the first line in the invloking constructor
+	
+
+ - CONSTROLLING ACCESS TO MEMBERS OF A Class
+	- At the top level - public or package private (no explicit modifier)
+	- At the member level - public, private, protected, or package private
+	- for class
+		- public - everyone
+		- no modifier - only within package
+	- members
+		- public - everyone
+		- no modifier - withing package
+		- private - within the class
+		- protected - withing the package and subclass
+
+ - STATIC
+	- fields & methods belongs to class, rather than to an instance of class i.e. object
+	- common to all instance of a class, once instance in memory
+	- can be manupulated by object or directly using the call, the value will change for all current objects, & new objects as well as accessing the value statically
+	- static method - common use case - access static fields
+	- cannot use this keyword as there is no object
+	- static final- used to decalre constants
+	- if static final of primitive, then compiler replaces the constants with actual value
+	
+ - STATIC INITIALIZATION BLOCK
+	- to initaize class variables
+		- static{
+			//variable initaization
+		}
+	- can have any number of static blocks anywhere, runtime gaurantees they are executed in the order they appear in the code
+	- alternative to static block
+		- private static method
+			- static VarType myVar = myStaticMethod();
+			- private static VarType myStaticMethod(){}
+
+ - INITIALIZING INSTANCE METHOD
+	- alternative to constructors
+	- 2 ways - initializer block & final methods
+	- initializer block - pair of curly braces without any static keyword
+		- { code }
+		- the compiler copies initializer blocks into every constructor. This approcah can be used to share a block of code code between multiple constructors
+	- final methods
+		- cannot be  overriden in a sub class
+		- Example
+			- private VarType myVar = initaizeFinalMethod();
+			- protected final VarType initaizeFinalMethod(){}
+			
+ - NESTED CLASSES
+	- class withing a class
+	- two types
+		- inner class - non-static
+		- static nested class - static
+	- inner classes have access to other members of the enclosing class, even if they are declared private
+	- static nested class don't have access to the members of the enclosing class
+	- a nested class can be declared private, protected, public, package private
+	- why use
+		- it is a way of logically grouping classes that are only used in one place
+		- inner class encapsulation
+		- more readable and maintainable code
+	- example - new OuterClass.new iinerClass()
+	- local class
+		- a class defined withing a block({}), generally in methods
+		-  can only access fields declared as final
+		- cannot declare static initializer in local classess
+	- anonymous classes are expressions
+
+
+######################################################################################################
+- ANNOTATIONS
+	- a form of metadata, provide data about a program that is not part of the program itself. Annotations have no direct effect on the operation of the code they annotate.
+	
+	- Annotations have a number of uses, among them:
+		- Information for the compiler — Annotations can be used by the compiler to detect errors or suppress warnings.
+		- Compile-time and deployment-time processing — Software tools can process annotation information to generate code, XML files, and so forth.
+		- Runtime processing — Some annotations are available to be examined at runtime.
+		
+	- The Format of an Annotation - @Entity
+		@Author(
+		   name = "Benjamin Franklin",
+		   date = "3/27/2003"
+		)
+		class MyClass { ... }
+	- If the annotations have the same type, then this is called a repeating annotation:
+
+		@Author(name = "Jane Doe")
+		@Author(name = "John Smith")
+		class MyClass { ... }
+	- Annotations can be applied to declarations: declarations of classes, fields, methods, and other program elements. When used on a declaration, each annotation often appears, by convention, on its own line.
+	- annotations can also be applied to the use of types
+		Class instance creation expression:
+			new @Interned MyObject();
+		Type cast:
+			myString = (@NonNull String) str;
+		implements clause:
+			class UnmodifiableList<T> implements
+				@Readonly List<@Readonly T> { ... }
+		Thrown exception declaration:
+			void monitorTemperature() throws
+				@Critical TemperatureException { ... }
+		This form of annotation is called a type annotation
+	- Defining a annotation
+		@interface AnnotationName {
+		   String author();
+		   String date();
+		   int currentRevision() default 1;
+		   String lastModified() default "N/A";
+		   String lastModifiedBy() default "N/A";
+		   // Note use of array
+		   String[] reviewers();
+		}
+		- The annotation type definition looks similar to an interface definition where the keyword interface is preceded by the at sign (@) (@ = AT, as in annotation type)
+	- To make the information in @AnnotationName appear in Javadoc-generated documentation, you must annotate the @AnnotationName definition with the @Documented annotation:
+		- @Documented
+		  @interface ClassPreamble {}
+	- Annotations That Apply to Other Annotations called meta-annotations
+	
+	- Type Annotations and Pluggable Type Systems
+		- annotations can also be applied to any type use. This means that annotations can be used anywhere you use a type. A few examples of where types are used are class instance creation expressions (new), casts, implements clauses, and throws clauses. This form of annotation is called a type annotation
+
+##########################################################################################################
+- INTERFACES
+
+	- INTERFACES - an interface is a reference type, similar to a class, that can contain only constants, method signatures, default methods, static methods, and nested types
+	- Method bodies exist only for default methods and static methods.
+	- Interfaces cannot be instantiated—they can only be implemented by classes or extended by other interfaces
+	- Defining an Interface
+		- An interface declaration consists of modifiers, the keyword interface, the interface name, a comma-separated list of parent interfaces (if any), and the interface body. For example:
+			- public interface GroupedInterface extends Interface1, Interface2, Interface3 {}
+	- The public access specifier indicates that the interface can be used by any class in any package. If you do not specify that the interface is public, then your interface is accessible only to classes defined in the same package as the interface.
+	- The interface body can contain abstract methods, default methods, and static methods. An abstract method within an interface is followed by a semicolon, but no braces (an abstract method does not contain an implementation). Default methods are defined with the default modifier, and static methods with the static keyword. All abstract, default, and static methods in an interface are implicitly public, so you can omit the public modifier.
+	- In addition, an interface can contain constant declarations. All constant values defined in an interface are implicitly public, static, and final. Once again, you can omit these modifiers.
+	- changing interfaces
+		- instead of adding a method to an existing interface, try to add a default method(i.e a method with implementation)
+	- Extending Interfaces That Contain Default Methods
+		- When you extend an interface that contains a default method, you can do the following:
+			- Not mention the default method at all, which lets your extended interface inherit the default method.
+			- Redeclare the default method, which makes it abstract.
+			- Redefine the default method, which overrides it.
+
+##########################################################################################################
+ - INHERITANCE
+	- A class that is derived from another class is called a subclass (also a derived class, extended class, or child class). The class from which the subclass is derived is called a superclass (also a base class or a parent class).
+	- A subclass inherits all the members (fields, methods, and nested classes) from its superclass. Constructors are not members, so they are not inherited by subclasses, but the constructor of the superclass can be invoked from the subclass
+	- What You Can Do in a Subclass
+		- A subclass inherits all of the public and protected members of its parent, no matter what package the subclass is in. If the subclass is in the same package as its parent, it also inherits the package-private members of the parent. You can use the inherited members as is, replace them, hide them, or supplement them with new members:
+			- The inherited fields can be used directly, just like any other fields.
+			- You can declare a field in the subclass with the same name as the one in the superclass, thus hiding it (not recommended).
+			- You can declare new fields in the subclass that are not in the superclass.
+			- The inherited methods can be used directly as they are.
+			- You can write a new instance method in the subclass that has the same signature as the one in the superclass, thus overriding it.
+			- You can write a new static method in the subclass that has the same signature as the one in the superclass, thus hiding it.
+			- You can declare new methods in the subclass that are not in the superclass.
+			- You can write a subclass constructor that invokes the constructor of the superclass, either implicitly or by using the keyword super.
+	- A nested class has access to all the private members of its enclosing class—both fields and methods. Therefore, a public or protected nested class inherited by a subclass has indirect access to all of the private members of the superclass.
+	- you can make a logical test as to the type of a particular object using the instanceof operator
+	- Within a class, a field that has the same name as a field in the superclass hides the superclass's field, even if their types are different. Within the subclass, the field in the superclass cannot be referenced by its simple name. Instead, the field must be accessed through super
+	- Object as a Superclass
+		- protected Object clone() throws CloneNotSupportedException
+			- Creates and returns a copy of this object.
+			- the class needs to implement Cloneable interface
+			 - external refenced objects may not be independent in clone and original object if default clone method is used. you should override the clone method to achieve desired behaviour
+		- public boolean equals(Object obj)
+			- Indicates whether some other object is "equal to" this one.
+			- uses the identity operator (==) to determine whether two objects are equal
+			- tests whether the object references are equal—that is, if the objects compared are the exact same object
+			- If you override equals(), you must override hashCode() as well.
+		- protected void finalize() throws Throwable
+			- Called by the garbage collector on an object when garbage collection determines that there are no more references to the object
+		- public final Class getClass()
+			- Returns the runtime class of an object.
+			- You cannot override getClass.
+			- The getClass() method returns a Class object, The Class class, in the java.lang package,
+		- public int hashCode()
+			- Returns a hash code value for the object.
+		- public String toString()
+			- Returns a string representation of the object.
+		- public final void notify()
+		- public final void notifyAll()
+		- public final void wait()
+		- public final void wait(long timeout)
+		- public final void wait(long timeout, int nanos)
+	- You use the final keyword in a method declaration to indicate that the method cannot be overridden by subclasses.
