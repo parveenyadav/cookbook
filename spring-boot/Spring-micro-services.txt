@@ -1,0 +1,49 @@
+Web Services
+	Software system designed to support interoperable machine-to-machine interaction over a network
+
+Web Services - Key Terminology
+	Request
+	Response
+	Message Exchange format
+		XML nad JSON
+	Service provider
+	Service Consumer
+	Service defination
+		contract between consumer and provider
+		Request/Response
+		Request Structure
+		Response Structure
+		EndPoint
+	Transport
+		HTTP
+		MQ
+SAOP WebServices
+	Simple Access Access Protocol
+	XML - request exchange format
+	Defined Request and response structure
+	Envelope -> header and body
+	Service Definition - WSDL
+		Web Service Definition Language
+		EndPoint
+		All Operations
+		Request Structure
+		Response Structure
+
+REST Web Services
+	REpresentational State Transfer
+	Make Best user of HTTP
+	Resource
+		URI - uniform Resource Identifier
+		A resource can have different represntations
+			XML
+			HTML
+			JSON
+	No Restriction on data exchange
+	HTTP  onlt Transport
+	No Standard on service Definition
+
+Spring Web
+	@RestController - tells spring that this class will handle REST Requests
+	@RequestMapping(method = RequestMethod.GET, path = "helloWorld") -  method level mapping
+	DispatcherServlet -  handles all requests, [/], it then finds the method and executes it
+	@RestController has @ResponseBody which has a message convertor that will map the response  
