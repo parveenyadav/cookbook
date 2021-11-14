@@ -45,5 +45,5 @@ REST Web Services
 Spring Web
 	@RestController - tells spring that this class will handle REST Requests
 	@RequestMapping(method = RequestMethod.GET, path = "helloWorld") -  method level mapping
-	DispatcherServlet -  handles all requests, [/], it then finds the method and executes it
-	@RestController has @ResponseBody which has a message convertor that will map the response  
+	DispatcherServlet -  handles all requests, [/], it then finds the method and executes it - this is front controller design pattern
+	@RestController has @ResponseBody which has a message convertor that will map the response
